@@ -16,14 +16,11 @@ char generate_number_character(){
 }
 
 char generate_symbol_character(){
-
     char symbols[] = "!@#$%^&*()-_=+[]{}|;:',.<>?/~`";
-
     return symbols[rand() % 30];
 }
 
 int int_input(char * message){
-
     printf("%s", message);
     int n;
     scanf("%d", &n);
@@ -32,7 +29,6 @@ int int_input(char * message){
 }
 
 char char_input(char * message) {
-
     getchar();
 
     printf("%s", message);
@@ -49,11 +45,7 @@ void check_length(int password_length){
     }
 }
 
-char * generate_password(
-    int password_length,  
-    char * (*shuffle)(), 
-    char (*generator[4])()){
-
+char * generate_password(int password_length,  char * (*shuffle)(), char (*generator[4])()){
     char base_password[5];
     for (int i = 0; i < 4; i++) { base_password[i] = generator[i](); }
 
@@ -80,7 +72,6 @@ char * shuffle(char * string, int size){
         string[i] = string[j];
         string[j] = tmp;
     }
-
     return string;
 }
 
