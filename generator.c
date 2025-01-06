@@ -3,12 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// password length
-// include uppercase
-// include numbers
-// include symbols
-// auto copy to clipboard
-
 char generate_alpha_character(){
     return 97 + (rand() % 26);
 }
