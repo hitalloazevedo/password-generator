@@ -3,6 +3,14 @@
 This application generates a strong password, containing lower and upper case letters, symbols and numbers. 
 
 #### How to run
+##### Cloning the repo
+```bash
+    git clone https://github.com/hitalloazevedo/password-generator
+```
+```bash
+    cd password-generator
+```
+
 ##### Compiling
 ```bash
     gcc generator.c -o generator
