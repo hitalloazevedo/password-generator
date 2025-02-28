@@ -3,6 +3,51 @@
 #include <stdlib.h>
 #include <string.h>
 
+// generates a random alpha character
+char generate_alpha_character();
+// generates a random upper case alpha character
+char generate_alpha_upper_character();
+// generates a random number from 0 to 9 as a character
+char generate_number_character();
+// generates a random symbol character
+char generate_symbol_character();
+// get a int input from stdin
+int get_integer(char * message);
+// check if the password length is less than 4 
+void check_password_length(int password_length);
+// generate a random password
+char * generate_password(int password_length,  char * (*shuffle)(), char (*generator[4])());
+// shuffle the string, swap characters positions randomly
+char * shuffle(char * string, int size);
+
+int main(){
+
+    // set the randomization seed based in the time
+    srand(time(NULL));
+
+    // setting generators functions
+    char (*generators[4]) () = { 
+        generate_alpha_character, 
+        generate_alpha_upper_character,
+        generate_number_character, 
+        generate_symbol_character 
+    };
+
+    printf("**** Password generator ****\n\n");
+
+    int password_length = get_integer("Password length (integer number): ");
+
+    check_password_length(password_length);
+
+    char * password = generate_password(password_length, shuffle, generators);
+    
+    printf("Password: %s\n", password);
+
+    free(password);
+
+    return 0;
+}
+
 char generate_alpha_character(){
     return 97 + (rand() % 26);
 }
@@ -20,33 +65,23 @@ char generate_symbol_character(){
     return symbols[rand() % 30];
 }
 
-int int_input(char * message){
+int get_integer(char * message){
     printf("%s", message);
     int n;
     scanf("%d", &n);
-
     return n;
 }
 
-char char_input(char * message) {
-    getchar();
-
-    printf("%s", message);
-    char c;
-    scanf("%c", &c);
-
-    return c;
-}
-
-void check_length(int password_length){
+void check_password_length(int password_length){
     if (password_length < 4){
-        printf("The password length must be greater than 4\n");
+        printf("The password length must be greater than 3\n");
         exit(1);
     }
 }
 
 char * generate_password(int password_length,  char * (*shuffle)(), char (*generator[4])()){
     char base_password[5];
+
     for (int i = 0; i < 4; i++) { base_password[i] = generator[i](); }
 
     char * password = (char*)malloc(sizeof(char) * (password_length + 1));
@@ -73,27 +108,4 @@ char * shuffle(char * string, int size){
         string[j] = tmp;
     }
     return string;
-}
-
-int main(int argc, char * argv[]){
-
-    // randomization config
-    srand(time(NULL));
-
-    // setting generators functions
-    char (*generators[4]) () = { 
-        generate_alpha_character, 
-        generate_alpha_upper_character,
-        generate_number_character, 
-        generate_symbol_character 
-    };
-
-    printf("**** Password generator ****\n\n");
-
-    int password_length = int_input("Password length (integer number): ");
-    check_length(password_length);
-    
-    printf("Password: %s\n", generate_password(password_length, shuffle, generators));
-
-    return 0;
 }
