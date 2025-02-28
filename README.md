@@ -1,6 +1,15 @@
 ### Simple Password Generator
 
 This application generates a strong password, containing lower and upper case letters, symbols and numbers. 
+Some concepts and techniques I have used:
+- dynamic memory allocation
+- pointers
+- functions
+- function pointers
+- vector of function pointers
+- random integers
+- for loops
+- strings manipulation
 
 #### How to run
 ##### Cloning the repo
